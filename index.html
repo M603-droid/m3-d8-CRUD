@@ -124,31 +124,32 @@
     -->
     <script>
       const getProducts = async () => {
+        const url = "https://striveschool-api.herokuapp.com/api/product/";
         try {
           const response = await fetch(
-            "https://striveschool-api.herokuapp.com/api/product/",
+            url,
+
             {
+              method: "GET",
               headers: {
                 Authorization:
                   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFkMGE0ODJkNTI2MjAwMTViNmRjZjkiLCJpYXQiOjE2MjkyOTMxMjgsImV4cCI6MTYzMDUwMjcyOH0.8DK3sMdjDcEoCHAP7_WPoyypr-k9TzCjlcjE1VNuXKs",
               },
             }
           );
-          if (response.ok) {
-            const newResponse = await response.json();
-            return newResponse;
-          }
+          const allTheProducts = await response.json();
+          return allTheProducts;
         } catch (err) {
           console.log("error is handled");
         }
       };
-      const displayProducts = (newResponse) => {
+      const displayProducts = (allTheProducts) => {
         //DOM Manipulation
         //target display product container
         let displayProductContainer =
           document.querySelector("#allProduct .row");
 
-        newResponse.forEach((newResponse) => {
+        allTheProducts.forEach((product) => {
           // const li = document.createElement("li")
 
           // li.classList.add("list-group-item")
@@ -166,9 +167,9 @@
       };
 
       window.onload = async () => {
-        const newResponse = await getProducts();
-        displayProducts(newResponse);
-        console.log(newResponse);
+        const allTheProducts = await getProducts();
+        displayProducts(allTheProducts);
+        console.log(allTheProducts);
       };
     </script>
   </body>
