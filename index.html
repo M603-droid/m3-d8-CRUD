@@ -78,16 +78,26 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Backoffice</a>
+            <a class="nav-link" href="backoffice.html">Backoffice</a>
           </li>
         </ul>
       </div>
     </nav>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col md-6">
-          <h2>Available Products List</h2>
-          <ul id="products" class="list-group"></ul>
+    <div class="container form-container">
+      <div class="row content-justify-center">
+        <div class="col-8">
+          <h5
+            style="
+              background-color: rgb(44, 40, 40);
+              text-align: center;
+              color: cornsilk;
+            "
+          >
+            Availabe Product List
+          </h5>
+          <div class="container" id="allProduct">
+            <div class="row"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -133,16 +143,26 @@
         }
       };
       const displayProducts = (newResponse) => {
-        //Dom manipulation
-        const ul = document.getElementById("products");
-        if (newResponse) {
-          newResponse.forEach((newResponse) => {
-            const li = document.createElement("li");
-            li.classList.add("list-group-item");
-            li.innerHTML = `<span>${product.name}<span><span>${product.description}<span>`;
-            ul.appendChild(li);
-          });
-        }
+        //DOM Manipulation
+        //target display product container
+        let displayProductContainer =
+          document.querySelector("#allProduct .row");
+
+        newResponse.forEach((newResponse) => {
+          // const li = document.createElement("li")
+
+          // li.classList.add("list-group-item")
+          // li.innerHTML = `<span>${product.name}</span><span>${product.price}`
+          displayProductContainer.innerHTML += `<div class="card col-12 col-sm-6 col-md-4 col-lg-2">
+                <img class="card-img-top" src="${product.imageUrl}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <h6 class="card-text">Brand: ${product.brand}</h6>
+                    <p class="card-text">Price: ${product.description}</p>
+                    <p class="card-text">Price: ${product.price}</p>
+                </div>
+                </div>`;
+        });
       };
 
       window.onload = async () => {
