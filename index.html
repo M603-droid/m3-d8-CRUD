@@ -53,7 +53,7 @@
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous"
     />
-
+    <link rel="stylesheet" href="style.css" />
     <title>Amazon CRUD</title>
   </head>
   <body>
@@ -144,16 +144,10 @@
         }
       };
       const displayProducts = (allTheProducts) => {
-        //DOM Manipulation
-        //target display product container
         let displayProductContainer =
           document.querySelector("#allProduct .row");
 
         allTheProducts.forEach((product) => {
-          // const li = document.createElement("li")
-
-          // li.classList.add("list-group-item")
-          // li.innerHTML = `<span>${product.name}</span><span>${product.price}`
           displayProductContainer.innerHTML += `<div class="card col-12 col-sm-6 col-md-4 col-lg-2">
                 <img class="card-img-top" src="${product.imageUrl}" alt="Card image cap">
                 <div class="card-body">
