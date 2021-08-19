@@ -150,11 +150,15 @@
         allTheProducts.forEach((product) => {
           displayProductContainer.innerHTML += `<div class="card col-12 col-sm-6 col-md-4 col-lg-2">
                 <img class="card-img-top" src="${product.imageUrl}" alt="Card image cap">
+
                 <div class="card-body">
                     <h5 class="card-title">${product.name}</h5>
                     <h6 class="card-text">Brand: ${product.brand}</h6>
                     <p class="card-text">Price: ${product.description}</p>
                     <p class="card-text">Price: ${product.price}</p>
+                    <a href="/details.html">Click Here</a>
+
+
                 </div>
                 </div>`;
         });
