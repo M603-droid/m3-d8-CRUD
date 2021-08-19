@@ -58,7 +58,6 @@
             Product Details
           </h5>
           <div id="product-details">
-            <img class="card-img-top" src="..." alt="Card image cap">
 
               
           <class="card-body">
@@ -97,24 +96,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     -->
     <script>
-        const productId = new URLSearchParams(window.location.search).get("id")
+        const productId = new URLSearchParams(window.location.search)
+        const newProductId =  productId.get("id")
+        console.log(newProductId)
 
         window.onload = async () => {
             const url = "https://striveschool-api.herokuapp.com/api/product/";
            
         
-            const response = await fetch(url  +  productId)
+            const response = await fetch(url + newProductId ,  {
+              method: "GET",
+              headers: {
+                Authorization:
+                  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFkMGE0ODJkNTI2MjAwMTViNmRjZjkiLCJpYXQiOjE2MjkyOTMxMjgsImV4cCI6MTYzMDUwMjcyOH0.8DK3sMdjDcEoCHAP7_WPoyypr-k9TzCjlcjE1VNuXKs",
+              },
+            } )
+
             
             if (response.ok) {
-                const productContainer = document.getElementById("card-body")
+                const productData = await response.json()
+                const productContainer = document.getElementById("product-details")
                 productContainer.innerHTML = `<div class="card col-12 col-sm-6 col-md-4 col-lg-2">
-                <img class="card-img-top" src="${product.imageUrl}" alt="Card image cap">
+                <img class="card-img-top" src="${productData.imageUrl}" alt="Card image cap">
 
                 <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <h6 class="card-text">Brand: ${product.brand}</h6>
-                    <p class="card-text">Price: ${product.description}</p>
-                    <p class="card-text">Price: ${product.price}</p>
+                    <h5 class="card-title">${productData.name}</h5>
+                    <h6 class="card-text">Brand: ${productData.brand}</h6>
+                    <p class="card-text">Price: ${productData.description}</p>
+                    <p class="card-text">Price: ${productData.price}</p>
 
 
                 </div>
